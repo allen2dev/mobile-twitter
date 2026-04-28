@@ -10,11 +10,26 @@ export function isThemeId(value: string | null): value is ThemeId {
 
 export const THEME_META: Record<
   ThemeId,
-  { label: string; description: string }
+  { label: string; description: string; preview: string }
 > = {
-  dark: { label: "深色", description: "默认夜间" },
-  light: { label: "浅色", description: "明亮界面" },
-  midnight: { label: "午夜", description: "紫调深色" },
+  dark: {
+    label: "深色",
+    description: "默认夜间",
+    preview:
+      "linear-gradient(145deg, oklch(0.32 0.04 260) 0%, oklch(0.14 0.03 260) 100%)",
+  },
+  light: {
+    label: "浅色",
+    description: "明亮界面",
+    preview:
+      "linear-gradient(145deg, oklch(0.99 0.01 260) 0%, oklch(0.9 0.02 260) 100%)",
+  },
+  midnight: {
+    label: "午夜",
+    description: "紫调深色",
+    preview:
+      "linear-gradient(145deg, oklch(0.38 0.14 290) 0%, oklch(0.14 0.08 300) 100%)",
+  },
 };
 
 /** Inline script: read localStorage and set data-theme before paint (avoid flash). */
