@@ -30,6 +30,7 @@ npm run build
 ## 技术说明
 
 - **output: "export"**：纯静态，无 Node 服务器。
+- **多主题**：`data-theme` + CSS 变量（`dark` / `light` / `midnight`），顶栏调色板入口，选择持久化到 `localStorage`；`layout` 内联脚本在首屏前应用主题，减少闪烁。
 - **images.unoptimized**：静态托管兼容。
 - 工作流见 `.github/workflows/pages.yml`：在 `master` / `main` 推送时构建并部署到 GitHub Pages。
 

@@ -3,6 +3,7 @@
 import { AnimatePresence, motion } from "framer-motion";
 import { useState } from "react";
 import { BottomNav, type TabId } from "@/components/BottomNav";
+import { ThemePicker } from "@/components/ThemePicker";
 import { TweetFeed } from "@/components/TweetFeed";
 import { SAMPLE_TWEETS } from "@/lib/sampleData";
 
@@ -20,23 +21,19 @@ export function AppShell() {
         initial={{ y: -12, opacity: 0 }}
         animate={{ y: 0, opacity: 1 }}
         transition={{ type: "spring", stiffness: 400, damping: 32 }}
-        className="sticky top-0 z-30 flex items-center justify-between border-b border-white/[0.08] bg-[oklch(0.11_0.02_260_/0.65)] px-4 py-3 backdrop-blur-xl supports-[backdrop-filter]:bg-[oklch(0.11_0.02_260_/0.45)]"
+        className="sticky top-0 z-30 flex items-center justify-between border-b border-[var(--border-subtle)] bg-[var(--bg-header)] px-4 py-3 backdrop-blur-xl supports-[backdrop-filter]:bg-[var(--bg-header-solid)]"
       >
-        <motion.div
-          className="flex h-9 w-9 items-center justify-center rounded-full bg-white/5 ring-1 ring-white/10"
-          whileHover={{ scale: 1.06 }}
-          whileTap={{ scale: 0.95 }}
-          aria-hidden
-        >
-          <span className="text-sm font-semibold text-sky-300">MT</span>
-        </motion.div>
-        <h1 className="text-lg font-semibold tracking-tight text-zinc-50">
+        <ThemePicker />
+        <h1 className="text-lg font-semibold tracking-tight text-[var(--text-primary)]">
           {tabTitle(tab)}
         </h1>
         <motion.button
           type="button"
-          className="rounded-full bg-gradient-to-r from-sky-500 to-indigo-500 px-4 py-2 text-sm font-semibold text-white shadow-lg shadow-sky-500/25 ring-1 ring-white/15"
-          whileHover={{ scale: 1.03, boxShadow: "0 12px 40px -8px rgb(56 189 248 / 0.45)" }}
+          className="rounded-full bg-gradient-to-r from-[var(--btn-from)] to-[var(--btn-to)] px-4 py-2 text-sm font-semibold text-white shadow-lg shadow-[var(--btn-shadow)] ring-1 ring-[var(--btn-ring)]"
+          whileHover={{
+            scale: 1.03,
+            boxShadow: "0 12px 40px -8px var(--btn-glow)",
+          }}
           whileTap={{ scale: 0.98 }}
         >
           发帖
@@ -65,7 +62,7 @@ export function AppShell() {
               transition={{ duration: 0.2 }}
               className="px-4 py-6"
             >
-              <p className="text-zinc-400">
+              <p className="text-[var(--text-muted)]">
                 探索页为演示占位 — 部署到 GitHub Pages 后可在此接入真实数据源或搜索。
               </p>
               <motion.div
@@ -83,10 +80,10 @@ export function AppShell() {
                       hidden: { opacity: 0, y: 12 },
                       visible: { opacity: 1, y: 0 },
                     }}
-                    className="rounded-2xl border border-white/10 bg-white/[0.04] px-4 py-3 text-zinc-200"
+                    className="rounded-2xl border border-[var(--border-card)] bg-[var(--chip-bg)] px-4 py-3 text-[var(--text-body)]"
                   >
-                    <span className="text-sky-300">{tag}</span>
-                    <span className="ml-2 text-sm text-zinc-500">
+                    <span className="text-[var(--accent-tag)]">{tag}</span>
+                    <span className="ml-2 text-sm text-[var(--text-secondary)]">
                       趋势 {1200 + i * 340}
                     </span>
                   </motion.div>
@@ -101,7 +98,7 @@ export function AppShell() {
               animate={{ opacity: 1, x: 0 }}
               exit={{ opacity: 0, x: 8 }}
               transition={{ duration: 0.2 }}
-              className="divide-y divide-white/[0.06]"
+              className="divide-y divide-[var(--divide)]"
             >
               {["有人赞了你的帖子", "有人转发了你的帖子", "新关注者：Design Lab"].map(
                 (text, i) => (
@@ -110,7 +107,7 @@ export function AppShell() {
                     initial={{ opacity: 0, x: -12 }}
                     animate={{ opacity: 1, x: 0 }}
                     transition={{ delay: i * 0.06 }}
-                    className="px-4 py-4 text-zinc-300"
+                    className="px-4 py-4 text-[var(--text-body)]"
                   >
                     {text}
                   </motion.div>
@@ -125,7 +122,7 @@ export function AppShell() {
               animate={{ opacity: 1, x: 0 }}
               exit={{ opacity: 0, x: 8 }}
               transition={{ duration: 0.2 }}
-              className="divide-y divide-white/[0.06]"
+              className="divide-y divide-[var(--divide)]"
             >
               {messages.map((m, i) => (
                 <motion.button
@@ -134,17 +131,19 @@ export function AppShell() {
                   initial={{ opacity: 0, y: 10 }}
                   animate={{ opacity: 1, y: 0 }}
                   transition={{ delay: i * 0.05 }}
-                  className="flex w-full gap-3 px-4 py-4 text-left transition-colors hover:bg-white/[0.04]"
+                  className="flex w-full gap-3 px-4 py-4 text-left transition-colors hover:bg-[var(--row-hover)]"
                 >
-                  <div className="flex h-11 w-11 shrink-0 items-center justify-center rounded-full bg-white/10 text-sm font-medium">
+                  <div className="flex h-11 w-11 shrink-0 items-center justify-center rounded-full bg-[var(--msg-avatar-bg)] text-sm font-medium text-[var(--text-primary)]">
                     {m.name.slice(0, 1)}
                   </div>
                   <div className="min-w-0 flex-1">
                     <div className="flex items-baseline justify-between gap-2">
-                      <span className="font-semibold text-zinc-100">{m.name}</span>
-                      <span className="text-xs text-zinc-500">{m.time}</span>
+                      <span className="font-semibold text-[var(--text-primary)]">
+                        {m.name}
+                      </span>
+                      <span className="text-xs text-[var(--text-secondary)]">{m.time}</span>
                     </div>
-                    <p className="truncate text-sm text-zinc-400">{m.preview}</p>
+                    <p className="truncate text-sm text-[var(--text-muted)]">{m.preview}</p>
                   </div>
                 </motion.button>
               ))}
@@ -157,7 +156,7 @@ export function AppShell() {
 
       <motion.div
         aria-hidden
-        className="pointer-events-none fixed inset-x-0 bottom-0 z-20 h-24 bg-gradient-to-t from-[oklch(0.12_0.02_260)] to-transparent"
+        className="pointer-events-none fixed inset-x-0 bottom-0 z-20 h-24 bg-gradient-to-t from-[var(--fade-bottom)] to-transparent"
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
         transition={{ delay: 0.4 }}

@@ -1,5 +1,7 @@
 import type { Metadata, Viewport } from "next";
 import { Inter } from "next/font/google";
+import { Providers } from "@/components/Providers";
+import { THEME_BOOT_SCRIPT } from "@/lib/theme";
 import "./globals.css";
 
 const inter = Inter({
@@ -37,8 +39,13 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="zh-CN" className={inter.variable}>
-      <body className="font-sans min-h-dvh">{children}</body>
+    <html lang="zh-CN" className={inter.variable} suppressHydrationWarning>
+      <head>
+        <script dangerouslySetInnerHTML={{ __html: THEME_BOOT_SCRIPT }} />
+      </head>
+      <body className="font-sans min-h-dvh">
+        <Providers>{children}</Providers>
+      </body>
     </html>
   );
 }

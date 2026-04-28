@@ -35,30 +35,30 @@ export function TweetFeed({ tweets }: Props) {
         <motion.li
           key={tweet.id}
           variants={item}
-          className="border-b border-white/[0.06] px-4 py-3 transition-colors hover:bg-white/[0.03]"
+          className="border-b border-[var(--divide)] px-4 py-3 transition-colors hover:bg-[var(--row-hover)]"
         >
           <article className="flex gap-3">
             <motion.div
               whileHover={{ scale: 1.04 }}
               whileTap={{ scale: 0.98 }}
-              className="flex h-11 w-11 shrink-0 items-center justify-center rounded-full bg-gradient-to-br from-sky-500/30 to-indigo-500/40 text-sm font-semibold text-white ring-1 ring-white/10"
+              className="flex h-11 w-11 shrink-0 items-center justify-center rounded-full bg-gradient-to-br from-[var(--avatar-from)] to-[var(--avatar-to)] text-sm font-semibold text-white ring-1 ring-[var(--border-subtle)]"
             >
               {tweet.avatar}
             </motion.div>
             <div className="min-w-0 flex-1">
               <header className="flex flex-wrap items-baseline gap-x-2 gap-y-0.5">
-                <span className="truncate font-semibold text-zinc-100">
+                <span className="truncate font-semibold text-[var(--text-primary)]">
                   {tweet.author}
                 </span>
-                <span className="truncate text-sm text-zinc-500">
+                <span className="truncate text-sm text-[var(--text-secondary)]">
                   @{tweet.handle}
                 </span>
-                <span className="text-sm text-zinc-600">· {tweet.time}</span>
+                <span className="text-sm text-[var(--text-faint)]">· {tweet.time}</span>
               </header>
-              <p className="mt-1 whitespace-pre-wrap text-[15px] leading-relaxed text-zinc-200">
+              <p className="mt-1 whitespace-pre-wrap text-[15px] leading-relaxed text-[var(--text-body)]">
                 {tweet.content}
               </p>
-              <div className="mt-3 flex max-w-md items-center justify-between text-zinc-500">
+              <div className="mt-3 flex max-w-md items-center justify-between text-[var(--text-secondary)]">
                 <Stat
                   label="回复"
                   value={tweet.stats.replies}
@@ -98,7 +98,7 @@ function Stat({
   return (
     <motion.button
       type="button"
-      className={`group flex items-center gap-1.5 rounded-full px-2 py-1 text-sm tabular-nums transition-colors hover:bg-white/5 hover:text-zinc-300 ${accent ? "hover:text-rose-300" : ""}`}
+      className={`group flex items-center gap-1.5 rounded-full px-2 py-1 text-sm tabular-nums transition-colors hover:bg-[var(--surface-hover)] hover:text-[var(--stat-hover)] ${accent ? "hover:text-[var(--like-hover)]" : ""}`}
       variants={{
         rest: { scale: 1 },
         hover: { scale: 1.02 },
@@ -106,7 +106,7 @@ function Stat({
     >
       <svg
         viewBox="0 0 24 24"
-        className={`h-[18px] w-[18px] ${accent ? "text-zinc-500 group-hover:text-rose-400" : ""}`}
+        className={`h-[18px] w-[18px] ${accent ? "text-[var(--like-icon)] group-hover:text-[var(--like-icon-hover)]" : ""}`}
         fill="currentColor"
         aria-hidden
       >

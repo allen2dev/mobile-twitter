@@ -22,7 +22,7 @@ export function BottomNav({ active, onChange }: Props) {
       initial={{ y: 24, opacity: 0 }}
       animate={{ y: 0, opacity: 1 }}
       transition={{ type: "spring", stiffness: 380, damping: 32 }}
-      className="fixed bottom-0 left-0 right-0 z-40 border-t border-white/[0.08] bg-[oklch(0.14_0.02_260_/0.72)] px-2 pb-[max(env(safe-area-inset-bottom),0.75rem)] pt-2 backdrop-blur-xl supports-[backdrop-filter]:bg-[oklch(0.14_0.02_260_/0.55)]"
+      className="fixed bottom-0 left-0 right-0 z-40 border-t border-[var(--border-subtle)] bg-[var(--bg-nav)] px-2 pb-[max(env(safe-area-inset-bottom),0.75rem)] pt-2 backdrop-blur-xl supports-[backdrop-filter]:bg-[var(--bg-nav-solid)]"
       aria-label="主导航"
     >
       <div className="mx-auto flex max-w-lg items-center justify-around">
@@ -34,25 +34,27 @@ export function BottomNav({ active, onChange }: Props) {
               key={tab.id}
               type="button"
               onClick={() => onChange(tab.id)}
-              className="relative flex flex-1 flex-col items-center gap-1 rounded-xl py-2 text-xs font-medium transition-colors focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-sky-400"
+              className="relative flex flex-1 flex-col items-center gap-1 rounded-xl py-2 text-xs font-medium transition-colors focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[var(--focus-ring)]"
               aria-current={isActive ? "page" : undefined}
             >
               {isActive ? (
                 <motion.span
                   layoutId="nav-pill"
-                  className="absolute inset-x-2 -top-0.5 bottom-0 -z-10 rounded-2xl bg-white/10 shadow-[inset_0_1px_0_0_rgba(255,255,255,0.06)]"
+                  className="absolute inset-x-2 -top-0.5 bottom-0 -z-10 rounded-2xl bg-[var(--pill-bg)] shadow-[inset_0_1px_0_0_rgba(255,255,255,0.06)]"
                   transition={{ type: "spring", stiffness: 420, damping: 34 }}
                 />
               ) : null}
               <Icon
                 className={
                   isActive
-                    ? "h-6 w-6 text-sky-300"
-                    : "h-6 w-6 text-zinc-500"
+                    ? "h-6 w-6 text-[var(--accent-strong)]"
+                    : "h-6 w-6 text-[var(--text-secondary)]"
                 }
               />
               <span
-                className={isActive ? "text-zinc-100" : "text-zinc-500"}
+                className={
+                  isActive ? "text-[var(--text-primary)]" : "text-[var(--text-secondary)]"
+                }
               >
                 {tab.label}
               </span>
